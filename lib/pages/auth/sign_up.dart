@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 
 class SignUp extends StatefulWidget {
+
+  final Function toggleView;
+  SignUp({ this.toggleView });
+
   @override
   _SignUpState createState() => _SignUpState();
 }
@@ -18,6 +22,15 @@ class _SignUpState extends State<SignUp> {
           backgroundColor: Colors.brown[400],
           elevation: 0.0,
           title: Text('Sign up to Brew Crew'),
+            actions: <Widget>[
+              FlatButton.icon(
+                  icon: Icon(Icons.person),
+                  label: Text('Sign In'),
+                  onPressed: () {
+                    widget.toggleView();
+                  }
+              )
+            ]
         ),
         body: Container(
             padding: EdgeInsets.symmetric(vertical: 20.0, horizontal: 50),
