@@ -1,3 +1,4 @@
+import 'package:brew_crew/pages/home/brew_tile.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:provider/provider.dart';
@@ -19,12 +20,17 @@ class _BrewListState extends State<BrewList> {
 //      print(doc.data);
 //    }
 
-    brews.forEach((brew) {
-      print(brew.name);
-      print(brew.sugars);
-      print(brew.strength);
-    });
+//    brews.forEach((brew) {
+//      print(brew.name);
+//      print(brew.sugars);
+//      print(brew.strength);
+//    });
 
-    return Container();
+    return ListView.builder(
+      itemCount: brews.length,
+      itemBuilder: (context, index){
+        return BrewTile(brew: brews[index]);
+      }
+    );
   }
 }
