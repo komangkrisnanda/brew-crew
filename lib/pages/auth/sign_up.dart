@@ -1,4 +1,5 @@
 import 'package:brew_crew/pages/services/auth.dart';
+import 'package:brew_crew/shared/loading.dart';
 import 'package:flutter/material.dart';
 import 'package:brew_crew/shared/constant.dart';
 
@@ -20,9 +21,11 @@ class _SignUpState extends State<SignUp> {
   String password = '';
   String error = '';
 
+  bool isLoading = false;
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return isLoading ? Loading() : Scaffold(
         backgroundColor: Colors.brown[100],
         appBar: AppBar(
           backgroundColor: Colors.brown[400],
@@ -73,10 +76,14 @@ class _SignUpState extends State<SignUp> {
                                 print(email);
                                 print(password);
 
+                                setState(() => isLoading = true);
                                 dynamic result = await _auth.registerWithEmailAndPassword(email, password);
 
                                 if(result == null){
-                                    setState(() => error = 'Please supply a valid email');
+                                    setState((){
+                                      isLoading = false;
+                                      error = 'Please supply a valid email';
+                                    });
                                 }
 
                             }
