@@ -50,7 +50,7 @@ class _SettingsFormState extends State<SettingsForm> {
                     //DropDown
                     DropdownButtonFormField(
                       decoration: textInputDecoration,
-                      value: _currentSugars ?? '0',
+                      value: _currentSugars ?? userData.sugars,
                       items: sugars.map((sugar){
                         return DropdownMenuItem(
                           value: sugar ?? userData.sugars,
@@ -79,6 +79,14 @@ class _SettingsFormState extends State<SettingsForm> {
                           print(_currentName);
                           print(_currentSugars);
                           print(_currentStrength);
+                            if(_formKey.currentState.validate()){
+                              await DatabaseService(uid: user.uid).updateUserData(
+                                _currentSugars ?? userData.sugars,
+                                _currentName ?? userData.name,
+                                _currentStrength ?? userData.strength
+                              );
+                              Navigator.pop(context);
+                            }
                         }
                     )
                   ]
