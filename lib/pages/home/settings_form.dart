@@ -29,7 +29,7 @@ class _SettingsFormState extends State<SettingsForm> {
           ),
           SizedBox(height: 20.0),
           TextFormField(
-            decoration: textInputDecoration,
+            decoration: textInputDecoration.copyWith(hintText: 'Enter your name'),
             validator: (val) => val.isEmpty ? 'Please enter a name' : null,
             onChanged: (val) => setState(() => _currentName = val)
           ),
@@ -47,6 +47,15 @@ class _SettingsFormState extends State<SettingsForm> {
             onChanged: (val) => setState(() => _currentSugars = val),
           ),
           //Slider
+          Slider(
+            value: (_currentStrength ?? 100).toDouble(),
+            activeColor: Colors.brown[_currentStrength ?? 100],
+            inactiveColor: Colors.brown[_currentStrength ?? 100],
+            min: 100,
+            max: 900,
+            divisions: 8,
+            onChanged: (val) => setState(() => _currentStrength = val.round()),
+          ),
           RaisedButton(
             color: Colors.pink[400],
             child: Text(
